@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/boards.css">
+{% endblock %}
+
+
+{% block body %}
+
+    <h1>Список доступных досок</h1>
+
+    <div class="boards-container">
+        {% for board in boards %}
+        <a href="{{ url_for('board', board_id=board.id) }}" class="board-card">
+            <h2>{{ board.name }}</h2>
+            <p>{{ board.description }}</p>
+            <img src="{{ url_for('static', filename='img/board.png') }}" alt="иконка">
+        </a>
+        {% endfor %}
+        
+    </div>
+
+{% endblock %}

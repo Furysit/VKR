@@ -1,0 +1,135 @@
+/* Переменные */
+
+[data-theme="light"] {
+    --background: #0077ff;
+    --color: #fff; /* Цвет текста */
+    --background-color: #0056b3;
+}
+
+[data-theme="dark"] {
+    --background-color: #4e1d75;
+    --background: rgb(89, 20, 106);
+    --background: linear-gradient(72deg, rgba(89, 20, 106, 1) 0%, rgba(107, 45, 161, 1) 36%, rgba(156, 60, 196, 1) 67%, rgba(170, 28, 217, 1) 78%);
+    --color: #ffffff; /* Цвет текста */
+}
+
+/* Общие стили */
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--color); 
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+
+
+
+/* FLASH Сообщения */
+.flashes {
+    list-style: none;
+    padding: 0;
+}
+
+.flashes .success {
+    color: green;
+}
+
+.flashes .error {
+    color: red;
+}
+
+
+
+/* Логотип */
+.header-div .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-div .logo img {
+    max-height: 50px;
+    width: auto;
+}
+
+/* Профиль и кнопка "Выйти" */
+.header-div .header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-div .header p {
+    color: var(--color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header-div .header p:hover {
+    text-decoration: underline;
+}
+
+/* Стили для main */
+main {
+    display: flex;
+}
+
+/* Навигационная панель */
+.navigation-div {
+
+    width: 200px;
+    height: 100vh;
+    background-color: var(--background-color);
+    padding: 20px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.103);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navigation-div ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation-div ul li {
+    margin-bottom: 10px;
+}
+
+.navigation-div ul li a {
+    color: var(--color);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navigation-div ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Контент в блоке body */
+main .content {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--background);
+    color: var(--color); 
+}
+
+
+
+
+/* СТИЛИ ДЛЯ АДМИН ПАНЕЛИ */
+
+.add-user-btn{
+    max-width: 120px;
+    max-height: 50px;
+}
+
+

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="authorization-div">
+        <form method="post" action="{{ url_for('authorization') }} ">
+            <div>
+                <input type="text" placeholder="Почта" name="email">
+            </div>
+            <div>
+                <input type="password" placeholder="Пароль" name="password">
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+{% endblock %}

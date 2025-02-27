@@ -1,0 +1,43 @@
+.students_container{
+    display: block;
+    border: solid 1px black;
+    
+    
+}
+
+.students-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid var(--color);
+    backdrop-filter: blur(500px);
+    border-radius: 10px;
+    height: auto;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.student-boards ul {
+    list-style: none;
+    padding: 0;
+}
+
+.student-boards ul :hover {
+    transition: 1ms ease-in;
+    background-color: #a8a8a856;
+}
+
+.student-boards li {
+    background-color: #979797;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+
+.student-boards a{
+    text-decoration: none;
+    color: #ffffffc9;
+}
+

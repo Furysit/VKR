@@ -1,0 +1,7 @@
+# Игнорируем кешированные файлы Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Игнорируем миграции Django
+migrations/

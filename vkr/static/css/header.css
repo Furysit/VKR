@@ -1,0 +1,98 @@
+/* Стили для хедера */
+.header-div {
+    display: flex;
+    justify-content: space-between; /* Логотип слева, кнопка справа */
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--second-color);
+}
+
+.header-div .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-div .logo img {
+    width: 150px; /* Ширина логотипа */
+}
+
+.header-div .navigation-div {
+    display: flex;
+    gap: 15px;
+}
+
+.header-div .header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-div .header a {
+    color: var(--color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header-div .header a:hover {
+    text-decoration: underline;
+}
+
+/* Кнопка "Войти" */
+.sign-in-button {
+    background-color: var(--main-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sign-in-button a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sign-in-button:hover {
+    background-color: var(--second-color);
+}
+
+/* Информация о пользователе */
+.user-info {
+    height: 40px;
+    width: 295px;
+    padding: 5px;
+    border: solid 1px black;
+    align-items: center;
+    display: flex;
+    justify-content: space-between; /* Расположение информации и кнопки выхода */
+}
+
+.user-info a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.user-info a:hover {
+    text-decoration: underline;
+}
+
+.user-info form {
+    margin: 0;
+}
+
+/* Стиль для кнопки выхода */
+.user-info button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.user-info button:hover {
+    background-color: darkred;
+}

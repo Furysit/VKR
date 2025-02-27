@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{ theme }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    {% block styles %}
+    {% endblock %}
+    
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+{% endwith %}
+
+
+<body>
+    <header>
+        {% block header %}
+        <div class="header-div">
+            <!-- Логотип -->
+            <div class="logo">
+                <a href="{{ url_for('index') }}">
+                    <img src="/static/img/logo--white.svg" alt="Логотип">
+                </a>
+            </div>
+            <div class="navigation-div">
+                {% if current_user.is_authenticated %}
+                <ul>
+                    <li><a href="{{ url_for('boards') }}">Доски</a></li>
+                    {% if current_user.role == 'admin' %}
+                        <li><a href="{{ url_for('students_list') }}">Список студентов</a></li>
+                        <li><a href="{{ url_for('teachers_list') }}">Список преподователей</a></li>
+                        <li><a href="{{ url_for('admin_panel') }}">Панель Администратора</a></li>
+                    {% endif %}
+                    {% if current_user.role == 'teacher' %}
+                        <li><a href="{{ url_for('user_page') }}">Кабинет преподователя</a></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+            <!-- Кнопка или информация о пользователе -->
+            <div class="header">
+                
+                {% if current_user.is_authenticated %}
+                    <!-- Если пользователь авторизован -->
+                    <div class="user-info">
+                        <a style="display: inline;" href="{{ url_for('user_page', user_id=current_user.id) }}">
+                            {{ current_user.name }}
+                        </a>
+                        <form action="{{ url_for('logout') }}">
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <!-- Если пользователь не авторизован -->
+                     <form action="{{ url_for('authorization') }}">
+                        <button class="sign-in-button">
+                            <p>Войти</p>
+                        </button>
+                     </form>
+                    
+                {% endif %}
+            </div>
+        </div>
+        {% endblock %}
+    </header>
+
+    <main>
+        
+        <div class="content">
+            {% block body %}
+        
+            {% endblock %}
+        </div>
+        
+
+    </main>
+
+        
+    {% block js %}
+    {% endblock %}
+    
+</body>
+</html>

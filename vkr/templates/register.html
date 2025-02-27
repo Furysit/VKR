@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="register-div">
+        <form method="post" action="{{ url_for('register') }}">
+            <div>
+                <input type="text" placeholder="ФИО" name="name">
+            </div>
+            <div>
+                <input type="email" placeholder="Почта" name="email">
+            </div>
+            <div>
+                <input type="password" placeholder="Пароль" name="password">
+            </div>
+            <div>
+                <select name="role" id="role-select">
+                    <option value="" disabled selected>Выберите роль</option>
+                    <option value="admin">Администратор</option>
+                    <option value="teacher">Преподаватель</option>
+                    <option value="student">Студент</option>
+                </select>
+            </div>
+            <div id="group-field" style="display: none;">
+                <input type="text" placeholder="Группа" name="group">
+            </div>
+            <button type="submit">Зарегистрировать</button>
+        </form>
+        <script>
+                    // Получаем элементы
+            const roleSelect = document.getElementById('role-select');
+            const groupField = document.getElementById('group-field');
+
+            // Слушаем изменение значения в select
+            roleSelect.addEventListener('change', function () {
+                if (this.value === 'student') {
+                    groupField.style.display = 'block'; // Показываем поле группы
+                } else {
+                    groupField.style.display = 'none'; // Скрываем поле группы
+                }
+            });
+        </script>
+    </div>
+{% endblock %}

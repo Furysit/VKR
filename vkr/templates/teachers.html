@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/students.css">
+{% endblock %}
+
+
+
+{% block body %}
+    <div class="students-container">
+        {% for entry in teachers_with_boards %}
+        <div class="students-item">
+            <h2>{{ entry.teacher.name }}</h2>
+            <p>Email: {{ entry.teacher.email }}</p>
+            
+            <div class="student-boards">
+                <h3>Доступные доски:</h3>
+                {% if entry.boards %}
+                    <ul>
+                        {% for board in entry.boards %}
+                        <a href="{{ url_for('board', board_id = board.id ) }}">
+                            <li>{{ board.name }}</li>
+                        </a>
+                        
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Нет доступных досок</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

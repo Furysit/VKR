@@ -1,0 +1,221 @@
+/* СТИЛИ ДЛЯ ДОСОК */
+/* Стиль для отображения досок */
+.boards-container{
+    display:flex;
+    gap: 10px;
+}
+
+.board-card {
+    width: 150px;
+    height: 100px;
+    text-decoration: none;
+    background-color: var(--background-color);
+    color: var(--color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.board-card img{
+    width: 80px;
+    height: 80px;
+}
+
+.board-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.562);
+}
+
+/* Стиль для каждой доски на board_page */
+
+.board-info{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    backdrop-filter: blur(11px);
+    background-color:  var(--board-info);
+    border: 1px solid transparent ;
+    border-radius: 6px;
+    box-shadow: 1px 1px 20px black;
+}
+
+.board-info h1{
+    height: auto;
+    width: auto;
+}
+
+
+.columns-container {
+    min-height: 700px;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: #f4f4f471;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    height: 100%;
+    position: relative;
+}
+
+.column-info{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+}
+
+.delete-column-btn{
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    border: solid 1px black;
+    border-radius: 7px;
+    margin-top: auto;
+}
+.delete-column-btn svg{
+    width: 15px;
+    height: 15px;
+    margin: auto;
+}
+
+
+.blocks-container {
+    margin-top: 10px;
+    min-height: 40px;
+    flex-grow: 1; /* Это растягивает контейнер с блоками на оставшееся пространство */
+    overflow-y: auto; /* Чтобы при необходимости добавлялись полосы прокрутки */
+    border: 1px dashed transparent;
+}
+
+.block {
+    font-size: 17px;
+    font-weight: 400;
+    text-align: left;
+    background: var(--background-color);
+    background: #adbbd1;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+
+
+.column-tools{
+    margin-top: 10px;
+    width: 100%;
+}
+.add-block-form{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.new-block-input{
+    font-size: 14px;
+    font-weight: 400;
+    min-height: 36px;
+    max-height: 160px;
+    width: auto;
+    margin: 0;
+    padding: 8px 12px;
+    overflow: hidden;
+    overflow-y: auto;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    resize: none;
+}
+
+
+.add-block-btn{
+    color: var(--color);
+    text-align: left;
+    width: 100%;
+    height: 25px;
+    border: hidden;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.go-back{
+    border: hidden;
+    border-radius: 8px;
+    background-color: transparent;
+}
+.go-back:hover{
+    border-radius: 8px;
+    background-color: var(--button-color-hover);
+}
+
+.add-block-btn:hover{
+    transition-property: background-color, border-color, box-shadow;
+    transition-duration: 85ms;
+    transition-timing-function: ease;
+    background-color: var(--button-color-hover);
+    box-shadow: inset 0 0 0 1px black;
+}
+
+
+
+
+a {
+    color: #fff;
+}
+
+.add-column-form {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.add-column-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    max-width: 250px;
+}
+
+.add-column-form button {
+    padding: 10px 20px;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-column-form button:hover {
+    background-color: var(--button-color-hover);
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 10s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+

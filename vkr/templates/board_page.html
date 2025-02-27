@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/boards.css">
+{% endblock %}
+
+
+
+{% block body %} 
+    <div class="board-info">
+        <h1>{{ board.name }}</h1>
+        <form class="add-column-form">
+            <input style="display: none;"  type="text" id="new-column-name" placeholder="Название колонки">
+            <button type="submit" id="add-column-btn">Добавить колонку</button>
+        </form>
+        <!-- Зона мусорки -->
+        <div class="trash-zone" style="border: 2px dashed #ccc; padding: 10px; margin-top: 10px;">
+            <p>Перетащите сюда для удаления</p>
+        </div>
+    </div>
+    
+    <div class="columns-container">
+        {% if columns|length != 0 %}
+
+            {% for column in columns %}
+            <div class="column" data-column-id="{{ column.id }}">
+
+                <div class="column-info">
+                    <h2>{{ column.name }}</h2>
+                </div>
+                <div class="blocks-container">
+                        {% for block in column.blocks %}
+                        <div class="block" data-block-id="{{ block.id }}">
+                            {{ block.text }}
+                        </div>
+                        {% endfor %}
+                </div>
+                <div class="column-tools">
+                    <form class="add-block-form">
+                        <textarea type="text" class="new-block-input" placeholder="Введите текст блока" style="display: none;"></textarea>
+                        <div style="display: flex; flex-direction: row;">
+                            <button class="add-block-btn" type="submit">Добавить ячейку</button>
+                            <button class="go-back" type="button" style="display: none;">
+                                <img src="{{ url_for('static', filename='img/back.png') }}" alt="Назад">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- <button class="delete-column-btn" aria-label="Удалить колонку">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 6h18v2H3V6zm3 4h12v12H6V10zm2 2v8h8v-8H8zm5-7h-2V2h2v1z"/>
+                </svg>
+            </button> -->
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+    <a href="{{ url_for('boards') }}">Назад к списку досок</a>
+
+    
+
+   
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    const boardId =  "{{ board.id|tojson|safe }}";
+</script>
+
+<script src="{{ url_for('static', filename='js/board.js') }}"></script>
+<script src="{{ url_for('static', filename='js/drag.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/drag_test.js')}}"></script> -->
+
+{% endblock %}

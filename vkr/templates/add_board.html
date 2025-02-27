@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div>
+    <h2>Создание новой доски</h2>
+    <form method="post" action="{{ url_for('add_board') }}">
+        <div>
+            <label for="name">Нзавание доски:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="owner">Владелец (преподаватель):</label>
+            <select id="owner" name="owner" required>
+                {% for teacher in teachers %}
+                <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div style="display: flex;">
+            <label for="students">Студенты:</label>
+            <select id="students" name="students" multiple required style="width: 120px; height: 150px;">
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Создать</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

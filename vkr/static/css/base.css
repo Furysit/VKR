@@ -1,0 +1,160 @@
+/* Переменные */
+
+[data-theme="light"] {
+    --background: linear-gradient(66deg, rgba(175,210,252,1) 0%, rgba(200,222,249,1) 13%, rgba(185,207,236,1) 40%, rgba(255,255,255,1) 100%);
+    --main-color: #21538d;
+    --second-color: rgb(150, 168, 204);
+    --color: #1f1f1f; /* Цвет текста */
+    --button-color: #939ab8;
+    --button-color-hover: #8db0dd;
+    --board-info: rgba(183, 194, 209, 0.733);
+}
+
+[data-theme="dark"] {
+    --background: linear-gradient(72deg, rgba(89, 20, 106, 1) 0%, rgba(107, 45, 161, 1) 36%, rgba(156, 60, 196, 1) 67%, rgba(170, 28, 217, 1) 78%);
+    /* --main-color: rgb(89, 20, 106); */
+    --main-color: rgb(89, 20, 106);
+    /* --second-color: #4e1d75; */
+    --second-color: #22162e;
+    --color: #ffffff; /* Цвет текста */
+    --button-color: #3a1a55;
+    --button-color-hover: #8334c4;
+    --board-info: hsla(285, 22%, 29%, 0.692);
+}
+
+/* Общие стили */
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--color); 
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+/* FLASH Сообщения */
+.flashes {
+    list-style: none;
+    padding: 0;
+}
+
+.flashes .success {
+    color: green;
+}
+
+.flashes .error {
+    color: red;
+}
+
+
+/* Стили для main */
+main {
+    display: flex;
+}
+
+/* Контент в блоке body */
+main .content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    /* background: var(--background); */
+    color: var(--color); 
+}
+
+main h1{
+    font-size: 22px;
+    font-weight: 800;
+}
+
+/* Навигационная панель */
+.navigation-div {
+    width: 100%;
+    background-color: var(--second-color);
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Выравнивание элементов по центру */
+}
+
+.navigation-div ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Горизонтальное расположение элементов */
+    gap: 20px; /* Отступы между пунктами */
+}
+
+.navigation-div ul li {
+    display: flex;
+    justify-content: center;
+}
+
+.navigation-div ul li a {
+    color: var(--color);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.navigation-div ul li a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* СТИЛИ ДЛЯ ФОРМ РЕГИСТРАЦИИ И АВТОРИЗАЦИИ */
+.authorization-div {
+    max-width: 400px;
+    max-height: 150px;
+    margin: 50px auto;
+    padding: 15px 20px; /* Уменьшенный внутренний отступ */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--second-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 200px; /* Устанавливаем минимальную высоту для компактности */
+}
+
+.register-div {
+    max-height: 300px;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #dddddd75;
+    border-radius: 8px;
+    backdrop-filter: blur(100px);
+    background-color: var(--second-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register-div form div, .authorization-div form div {
+    margin-bottom: 15px;
+}
+
+.register-div form input, .authorization-div form input,
+.register-div form select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.register-div form button, .authorization-div form button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--button-color);
+    border: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.register-div form button:hover, .authorization-div form button:hover {
+    background-color: var(--button-color-hover);
+}
+

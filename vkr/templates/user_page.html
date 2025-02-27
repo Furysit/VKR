@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Личный кабинет {% endblock %}
+
+
+{% block body %}
+
+    <h1>Страничка пользователя</h1>
+
+    {% if current_user.role == 'teacher' %}
+    
+    <form action="{{ url_for('add_board') }}">
+        <button class="add-user-btn" >Добавить доску</button>
+    </form>
+
+    {% endif %}
+
+    <form action="{{ url_for('change_colorset') }}" method="post">
+        <button type="submit" value="light" name="theme">Светлая тема</button>
+        <button type="submit" value="dark" name="theme">Ночная тема</button>
+    </form>
+    
+{% endblock %}

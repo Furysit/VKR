@@ -1,0 +1,23 @@
+/* СТИЛИ ДЛЯ ОСНОВНОЙ СТРАНИЦЫ */
+.description-div{
+    margin: 20px auto;
+}
+
+.title{
+    margin: auto;
+    display: flex;
+}
+.description-div h1{
+    font-family:sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0px auto;
+}
+
+.description{
+    margin-top: 30px;
+    font-family:sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    overflow: hidden;
+}
