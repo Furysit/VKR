@@ -38,9 +38,14 @@
                 <ul>
                     <li><a href="{{ url_for('boards') }}">Доски</a></li>
                     {% if current_user.role == 'admin' %}
-                        <li><a href="{{ url_for('students_list') }}">Список студентов</a></li>
-                        <li><a href="{{ url_for('teachers_list') }}">Список преподователей</a></li>
-                        <li><a href="{{ url_for('admin_panel') }}">Панель Администратора</a></li>
+                        <li class="admin-dropdown">
+                            <a href="#">Панель Администратора</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('students_list') }}">Список студентов</a></li>
+                                <li><a href="{{ url_for('teachers_list') }}">Список преподавателей</a></li>
+                                <li><a href="{{ url_for('register') }}">Добавить пользователя</a></li>
+                            </ul>
+                        </li>
                     {% endif %}
                     {% if current_user.role == 'teacher' %}
                         <li><a href="{{ url_for('user_page') }}">Кабинет преподователя</a></li>
@@ -54,6 +59,9 @@
                 {% if current_user.is_authenticated %}
                     <!-- Если пользователь авторизован -->
                     <div class="user-info">
+                        <div class="user-avatar">
+                            <img src="/static/img/avatar.png" alt="аватарка">
+                        </div>
                         <a style="display: inline;" href="{{ url_for('user_page', user_id=current_user.id) }}">
                             {{ current_user.name }}
                         </a>

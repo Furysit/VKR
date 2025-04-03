@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 from vkr import app,db,manager
-from vkr.models import User, Board, Column, Block
+from vkr.models import User, Board, Column, Block, student_board_association
 
 
 @manager.user_loader
@@ -114,17 +114,28 @@ def boards():
 
 @app.route('/board/<int:board_id>')
 def board(board_id):
-    # Проверяем, есть ли доступ у текущего пользователя
+    # Получаем доску или выдаем 404
     board = Board.query.get_or_404(board_id)
+
+    # Проверяем доступ к доске
     if current_user.role == "teacher" and board.owner != current_user.id:
         abort(403)  # Преподаватель видит только свои доски
-    if current_user.role == "student" and board not in current_user.boards:
+    if current_user.role == "student" and board_id not in [b.id for b in current_user.boards]:
         abort(403)  # Студент видит только доски, к которым у него есть доступ
 
-    # Загружаем данные колонок и блоков
+    # Загружаем колонки доски
     columns = Column.query.filter_by(board_id=board_id).all()
 
-    return render_template('board_page.html', board=board, columns=columns)
+    # Загружаем студентов, у которых есть доступ к доске
+    students = User.query.join(student_board_association).filter(
+        student_board_association.c.board_id == board_id,
+        User.role == 'student'  # Фильтруем только студентов
+    ).all()
+    
+    teacher = User.query.get(board.owner)
+
+    
+    return render_template('board_page.html', board=board, columns=columns, students=students, teacher=teacher)
 
 @app.route('/user_page')
 def user_page():

@@ -2,6 +2,7 @@
 
 {% block styles %}
     <link rel="stylesheet" href="/static/css/boards.css">
+    <link rel="stylesheet" href="/static/css/board_info.css">
 {% endblock %}
 
 
@@ -9,15 +10,32 @@
 {% block body %} 
     <div class="board-info">
         <h1>{{ board.name }}</h1>
-        <form class="add-column-form">
-            <input style="display: none;"  type="text" id="new-column-name" placeholder="Название колонки">
-            <button type="submit" id="add-column-btn">Добавить колонку</button>
-        </form>
-        <!-- Зона мусорки -->
-        <div class="trash-zone" style="border: 2px dashed #ccc; padding: 10px; margin-top: 10px;">
+        <div>
+            <ul>
+                <li>Преподаватель: {{ teacher.name }}</li>
+                <li>Для связи: {{ teacher.email }}</li>
+            </ul>
+        </div>
+        <button class="show-members-btn">Участники</button>
+        <div class="trash-zone">
             <p>Перетащите сюда для удаления</p>
         </div>
     </div>
+    
+            <div  id="members-div" class="members">
+                <div class="content">
+                    <span class="close">&times;</span>
+                    <h2>Участники</h2>
+                    <ul>
+                        {% for i in students %}
+                            <li>{{ i.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+    
+    
+    
     
     <div class="columns-container">
         {% if columns|length != 0 %}
@@ -52,7 +70,28 @@
                   <path d="M3 6h18v2H3V6zm3 4h12v12H6V10zm2 2v8h8v-8H8zm5-7h-2V2h2v1z"/>
                 </svg>
             </button> -->
+           
             {% endfor %}
+            <form class="add-column-form">
+                <input style="display: none;"  type="text" id="new-column-name" placeholder="Название колонки">
+                <div style="display: flex; flex-direction: row; gap: 2px;">
+                    <button type="submit" id="add-column-btn">Добавить колонку</button>
+                    <button class="go-back-column" type="button" style="display: none;">
+                        <img src="{{ url_for('static', filename='img/back.png') }}" alt="Назад">
+                    </button>
+                </div>
+            </form>
+        
+        {% else %}
+        <form class="add-column-form">
+            <input style="display: none;"  type="text" id="new-column-name" placeholder="Название колонки">
+            <div style="display: flex; flex-direction: row; gap: 2px;">
+                <button type="submit" id="add-column-btn">Добавить колонку</button>
+                <button class="go-back-column" type="button" style="display: none;">
+                    <img src="{{ url_for('static', filename='img/back.png') }}" alt="Назад">
+                </button>
+            </div>
+        </form>
         {% endif %}
     </div>
     
@@ -70,6 +109,7 @@
 
 <script src="{{ url_for('static', filename='js/board.js') }}"></script>
 <script src="{{ url_for('static', filename='js/drag.js') }}"></script>
+<script src="{{ url_for('static', filename='js/show_members.js')}}"></script>
 <!-- <script src="{{ url_for('static', filename='js/drag_test.js')}}"></script> -->
 
 {% endblock %}

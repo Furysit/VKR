@@ -1,10 +1,12 @@
-/* Стили для хедера */
+/* ===== СТИЛИ ДЛЯ ХЕДЕРА ===== */
 .header-div {
     display: flex;
+    position: relative;
     justify-content: space-between; /* Логотип слева, кнопка справа */
     align-items: center;
     padding: 10px 20px;
     background: var(--second-color);
+    z-index: 1000;
 }
 
 .header-div .logo {
@@ -37,6 +39,56 @@
     text-decoration: underline;
 }
 
+/* ===== ВЫПАДАЮЩЕЕ МЕНЮ (ПАНЕЛЬ АДМИНИСТРАТОРА) ===== */
+
+.admin-dropdown {
+    position: relative;
+}
+
+/* Скрытое меню по умолчанию */
+.admin-dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--second-color);
+    border-radius: 5px;
+    list-style: none;
+    padding: 5px 0;
+    min-width: 180px;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+}
+
+/* Стили для элементов меню */
+.admin-dropdown .dropdown-menu li {
+    padding: 10px;
+    text-align: center;
+}
+
+.admin-dropdown .dropdown-menu li a {
+    display: block;
+    color: var(--color);
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+/* Эффект при наведении */
+.admin-dropdown .dropdown-menu li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Показываем меню при наведении */
+.admin-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+
+
+
+
 /* Кнопка "Войти" */
 .sign-in-button {
     background-color: var(--main-color);
@@ -63,12 +115,26 @@
     width: 295px;
     padding: 5px;
     border: solid 1px black;
+    border-radius: 6px;
+    background-color: #8f8f8f79;
     align-items: center;
     display: flex;
     justify-content: space-between; /* Расположение информации и кнопки выхода */
 }
 
+.user-avatar{
+    width: 45px;
+    height: 45px;
+    padding: 3px;
+}
+
+.user-avatar img{
+    width: 44px;
+    height: 44px;
+}
+
 .user-info a {
+    width: 150px;
     color: #fff;
     text-decoration: none;
     font-weight: bold;

@@ -1,0 +1,104 @@
+.board-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+    backdrop-filter: blur(10px);
+    background-color: var(--board-info);
+    border-radius: 6px;
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    gap: 20px;
+}
+
+.board-info h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.board-info div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.board-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.board-info ul li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.board-info ul li::before {
+    content: "👤"; /* Иконка */
+    font-size: 16px;
+}
+
+.trash-zone {
+    padding: 8px 15px;
+    background: rgba(255, 0, 0, 0.2);
+    border-radius: 6px;
+    font-weight: bold;
+    color: #ffffff;
+    border: 2px dashed #ff4d4d;
+}
+
+.members{
+    display: none;
+    align-items: left;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: var(--board-info);
+}
+.members .content {
+    text-align: left;
+}
+
+.members ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.members li {
+    padding: 5px 0;
+}
+
+.members li:last-child {
+    border-bottom: none;
+}
+
+.close {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.show-members-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.show-members-btn:hover {
+    background: #0056b3;
+}

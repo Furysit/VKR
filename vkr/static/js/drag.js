@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         draggedElement = null;
         draggedType = null;
         console.log("КОЛОНКА опущена");
+        location.reload();
       });
     });
   
@@ -81,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const newColumnId = container.closest('.column').dataset.columnId;
           console.log('Перемещаем блок', blockId, 'в колонку', newColumnId);
           await updateBlockColumn(blockId, newColumnId);
+          location.reload();
         }
       });
     });
@@ -115,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (draggedElement) {
             draggedElement.remove();
           }
+          location.reload();
         }
       });
     }

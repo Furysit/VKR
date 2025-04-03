@@ -2,21 +2,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const columnsContainer = document.querySelector('.columns-container');
     const columnNameInput = document.getElementById('new-column-name');
     const addColumnButton = document.getElementById('add-column-btn');
-    const goBackButton = document.querySelector('.go-back');
+    const goBackColumnButton = document.querySelector('.go-back-column');
     const addColumnForm = document.querySelector(".add-column-form");
     
 
     // **************LISTENERS*************************
     addColumnButton.addEventListener('click', (e) => {
         e.preventDefault();
-        if (columnNameInput.style.display === 'none') {
+        if (columnNameInput.style.display === 'none' || columnNameInput.style.display === '') {
             columnNameInput.style.display = 'block';
-
+            goBackColumnButton.style.display = 'block';
+            columnNameInput.focus();
         } else {
             addColumnForm.requestSubmit();
         }
     });
 
+    goBackColumnButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        columnNameInput.style.display = 'none';
+        columnNameInput.value = '';
+        goBackColumnButton.style.display = 'none';
+    });
+    
+    
     addColumnForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         await addColumn();
@@ -77,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
           }
     
-          // Функция addBlockToColumn реализована у вас
+          
           await addBlockToColumn(columnElement, columnElement.dataset.columnId, blockText);
     
           // Сброс значений и скрытие элементов после отправки
