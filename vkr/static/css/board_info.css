@@ -11,15 +11,40 @@
     gap: 20px;
 }
 
+.board-main-info {
+    width: 50%;
+    max-width: 1000px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px 25px;
+    color: var(--color);
+    background-color: var(--board-info);
+    border: 1px solid var(--color);
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px var(--color);
+}
+
+.members {
+    display: flex;
+    align-items: left;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    margin: 0px auto;
+}
+
 .board-info h1 {
     font-size: 24px;
     font-weight: bold;
     margin: 0;
 }
 
-.board-info div {
+.board-name-div {
     display: flex;
-    align-items: center;
+    align-items: left;
     gap: 15px;
 }
 
@@ -36,69 +61,59 @@
     align-items: center;
     gap: 8px;
     padding: 5px 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
 }
 
-.board-info ul li::before {
-    content: "👤"; /* Иконка */
-    font-size: 16px;
-}
 
 .trash-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
     padding: 8px 15px;
     background: rgba(255, 0, 0, 0.2);
     border-radius: 6px;
     font-weight: bold;
-    color: #ffffff;
     border: 2px dashed #ff4d4d;
+    height: 70px;
 }
 
-.members{
-    display: none;
-    align-items: left;
-    text-align: left;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    margin: 0px auto;
-    background-color: var(--board-info);
-}
-.members .content {
-    text-align: left;
+
+.color-circle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.members ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.members li {
-    padding: 5px 0;
-}
-
-.members li:last-child {
-    border-bottom: none;
-}
-
-.close {
-    float: right;
-    font-size: 20px;
+.color-circle {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #000000;
     cursor: pointer;
-    margin-left: 10px;
 }
 
-.show-members-btn {
-    background: #007bff;
-    color: white;
+.current-user-color-circle {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+
+#color-picker {
+    width: 30px;
+    height: 30px;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
     cursor: pointer;
-    position: relative;
+    opacity: 0; /* Скрываем стандартный input */
+    position: absolute;
 }
 
-.show-members-btn:hover {
-    background: #0056b3;
+.take-task{
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #000000;
+    cursor: pointer;
 }

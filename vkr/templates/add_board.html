@@ -1,28 +1,42 @@
 {% extends 'base.html' %}
+{% block title %}
+    Добавление новой доски
+{% endblock %}
+
+
+{% block styles %}
+ <link rel="stylesheet" href="/static/css/add_board.css">
+{% endblock %}
+
+
 
 {% block body %}
-<div>
-    <h2>Создание новой доски</h2>
-    <form method="post" action="{{ url_for('add_board') }}">
+
+
+<div class="add_board">
+    <h1>Создание новой доски</h1>
+    <form class="add_board_form" method="post" action="{{ url_for('add_board') }}">
         <div>
             <label for="name">Нзавание доски:</label>
             <input type="text" id="name" name="name" required>
         </div>
-        <div>
-            <label for="owner">Владелец (преподаватель):</label>
-            <select id="owner" name="owner" required>
-                {% for teacher in teachers %}
-                <option value="{{ teacher.id }}">{{ teacher.name }}</option>
-                {% endfor %}
-            </select>
+        <div class="owner-field">
+            <label>Владелец (преподаватель):</label>
+            {% if current_user.is_authenticated %}
+                <input type="hidden" name="owner" value="{{ current_user.id }}">
+            {% endif %}
+            <div class="owner-value">{{ current_user.name }}</div>
         </div>
-        <div style="display: flex;">
-            <label for="students">Студенты:</label>
-            <select id="students" name="students" multiple required style="width: 120px; height: 150px;">
+        <div class="students-checkboxes">
+            <label>Студенты:</label>
+            <div class="checkbox-list">
                 {% for student in students %}
-                <option value="{{ student.id }}">{{ student.name }}</option>
+                <label class="checkbox-item">
+                    <input type="checkbox" name="students" value="{{ student.id }}">
+                    <span>{{ student.surname}} {{ student.name }}</span>
+                </label>
                 {% endfor %}
-            </select>
+            </div>
         </div>
         <div>
             <button type="submit">Создать</button>

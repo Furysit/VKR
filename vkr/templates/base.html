@@ -48,25 +48,34 @@
                         </li>
                     {% endif %}
                     {% if current_user.role == 'teacher' %}
-                        <li><a href="{{ url_for('user_page') }}">Кабинет преподователя</a></li>
+                        <li><a href="{{ url_for('add_board') }}">Добавить доску</a></li>
                     {% endif %}
                 </ul>
                 {% endif %}
             </div>
-            <!-- Кнопка или информация о пользователе -->
+
             <div class="header">
-                
                 {% if current_user.is_authenticated %}
                     <!-- Если пользователь авторизован -->
                     <div class="user-info">
                         <div class="user-avatar">
                             <img src="/static/img/avatar.png" alt="аватарка">
                         </div>
-                        <a style="display: inline;" href="{{ url_for('user_page', user_id=current_user.id) }}">
+                        <p style="display: inline;">
+                            {{ current_user.surname }}
                             {{ current_user.name }}
-                        </a>
+                        </p>
+                        <div>
+                            <form action="{{ url_for('change_colorset') }}" method="POST">
+                                <button class="change-colorset-btn" title="Сменить тему" type="submit">
+                                    🎨
+                                </button>
+                            </form>
+                            
+                        </div>
+                        
                         <form action="{{ url_for('logout') }}">
-                            <button type="submit">Выйти</button>
+                            <button class="logout-btn" type="submit">Выйти</button>
                         </form>
                     </div>
                 {% else %}

@@ -4,13 +4,17 @@
     <link rel="stylesheet" href="/static/css/students.css">
 {% endblock %}
 
-
+{% block title %} Список студентов {% endblock %}
 
 {% block body %}
     <div class="students-container">
         {% for entry in students_with_boards %}
         <div class="students-item">
+            <h2>{{ entry.student.surname }}</h2>
             <h2>{{ entry.student.name }}</h2>
+            <h2>{{ entry.student.patronymic }}</h2>
+            
+
             <p>Группа: {{ entry.student.group }}</p>
             <p>Email: {{ entry.student.email }}</p>
             

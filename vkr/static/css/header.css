@@ -133,23 +133,24 @@
     height: 44px;
 }
 
-.user-info a {
-    width: 150px;
+.user-info p {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-}
-
-.user-info a:hover {
-    text-decoration: underline;
 }
 
 .user-info form {
     margin: 0;
 }
 
+.change-colorset-btn{
+    font-size: 20px;
+    background: transparent;
+    border: none;
+
+}
 /* Стиль для кнопки выхода */
-.user-info button {
+.logout-btn {
     background-color: red;
     color: #fff;
     border: none;
@@ -159,6 +160,6 @@
     font-size: 14px;
 }
 
-.user-info button:hover {
+.logout-btn:hover {
     background-color: darkred;
 }

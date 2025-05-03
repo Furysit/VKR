@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         draggedElement = null;
         draggedType = null;
         console.log("КОЛОНКА опущена");
-        location.reload();
+        
       });
     });
   
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const newColumnId = container.closest('.column').dataset.columnId;
           console.log('Перемещаем блок', blockId, 'в колонку', newColumnId);
           await updateBlockColumn(blockId, newColumnId);
-          location.reload();
+          
         }
       });
     });
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (draggedElement) {
             draggedElement.remove();
           }
-          location.reload();
+          
         }
       });
     }
@@ -133,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         if (!response.ok) {
           alert('Ошибка при перемещении блока.');
+        }
+        else {
+          location.reload();
         }
       } catch (error) {
         console.error('Ошибка:', error);
@@ -150,6 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!response.ok) {
             alert('Ошибка при удалении блока.');
           }
+          else{
+            location.reload();
+          }
         } catch (error) {
           console.error('Ошибка:', error);
           alert('Не удалось удалить блок.');
@@ -164,6 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         if (!response.ok) {
           alert('Ошибка при удалении колонки.');
+        }
+        else{
+          location.reload();
         }
       } catch (error) {
         console.error('Ошибка:', error);

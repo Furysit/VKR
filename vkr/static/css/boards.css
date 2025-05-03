@@ -1,34 +1,46 @@
 /* СТИЛИ ДЛЯ ДОСОК */
 /* Стиль для отображения досок */
-.boards-container{
-    display:flex;
-    gap: 10px;
+.boards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    padding: 20px;
 }
 
 .board-card {
-    width: 150px;
-    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 140px;
     text-decoration: none;
-    background-color: var(--background-color);
-    color: var(--color);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
+    background: var(--board-info, #e0e7ff);
+    color: var(--color, #212529);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    border-radius: 16px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-.board-card img{
-    width: 80px;
-    height: 80px;
+.board-card img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
+    object-fit: contain;
 }
 
 .board-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.562);
+    transform: translateY(-8px) scale(1.02);
+    background: var(--button-color, #6d9ce8);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
+
+
 
 /* Стиль для каждой доски на board_page */
 
@@ -40,26 +52,29 @@
     display: flex;
     gap: 20px;
     padding: 20px;
+    overflow-x: scroll;
 }
 
 .column {
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: #f4f4f471;
-    border: 1px solid #ccc;
+    background: var(--column-bg);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 20px;
     width: 300px;
+    min-width: 255px;
     height: 100%;
     position: relative;
+    transition: transform 0.2s ease-in-out;
 }
 
 .column-info{
     display: flex;
     flex-direction: row;
-    text-align: center;
-    justify-content: center;
+    text-align: left;
+    font-weight: 600;
 }
 
 
@@ -74,16 +89,19 @@
 }
 
 .block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     font-size: 17px;
     font-weight: 400;
     text-align: left;
-    background: var(--background-color);
-    background: #adbbd1;
-    border: 1px solid #ddd;
+    background: var(--block-bg);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 10px;
     margin-bottom: 10px;
     overflow: hidden;
+    transition: transform 0.2s ease-in-out;
 }
 
 
@@ -197,5 +215,4 @@ a {
         transform: translateY(0);
     }
 }
-
 

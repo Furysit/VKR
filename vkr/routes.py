@@ -35,6 +35,8 @@ def admin_panel():
 def register():
 
     name = request.form.get('name')
+    surname = request.form.get('surname')
+    patronymic = request.form.get('patronymic')
     login = request.form.get('email')
     password = request.form.get('password')
     role = request.form.get('role')
@@ -43,7 +45,7 @@ def register():
     if request.method == 'POST':
         # Проверка на заполненность полей
         if not (name and login and password and role):
-            flash('Ошибка: Все поля должны быть заполнены!', 'error')
+            flash('Ошибка: Вы пропустили поле', 'error')
             return render_template('register.html')
 
         # Проверка на существующего пользователя
@@ -55,7 +57,7 @@ def register():
         # Создание нового пользователя
         try:
             password_hash = generate_password_hash(password)
-            new_user = User(name=name, email=login, password=password_hash, role=role, group=group)
+            new_user = User(name=name, surname = surname, patronymic = patronymic, email=login, password=password_hash, role=role, group=group)
             db.session.add(new_user)
             db.session.commit()
             flash('Пользователь успешно добавлен!', 'success')
@@ -126,16 +128,23 @@ def board(board_id):
     # Загружаем колонки доски
     columns = Column.query.filter_by(board_id=board_id).all()
 
-    # Загружаем студентов, у которых есть доступ к доске
-    students = User.query.join(student_board_association).filter(
-        student_board_association.c.board_id == board_id,
-        User.role == 'student'  # Фильтруем только студентов
-    ).all()
-    
+     # Загружаем студентов с их цветами
+    students_list = db.session.execute(
+        db.select(User.id, User.name, student_board_association.c.color)
+        .join(student_board_association)
+        .where(student_board_association.c.board_id == board_id)
+        .where(User.role == "student")
+    ).fetchall()
+
+    students = [{"id": s.id, "name": s.name, "color": s.color} for s in students_list]
+    current_user_color = next(
+    (s.color for s in students_list if s.id == current_user.id),
+    None  # Значение по умолчанию, если не найден
+    )
     teacher = User.query.get(board.owner)
 
     
-    return render_template('board_page.html', board=board, columns=columns, students=students, teacher=teacher)
+    return render_template('board_page.html', board=board, columns=columns, students=students, teacher=teacher, current_user_color = current_user_color)
 
 @app.route('/user_page')
 def user_page():
@@ -162,12 +171,12 @@ def teachers_list():
     teachers = User.query.filter_by(role = 'teacher').all()
 
     teachers_with_boards = [
-        {
-            "teacher" : teacher,
-            "boards": teacher.boards
-        }
-        for teacher in teachers
-    ]
+    {
+        "teacher": teacher,
+        "boards": teacher.created_boards  # Только созданные доски
+    }
+    for teacher in teachers
+]
     return render_template('teachers.html', teachers_with_boards = teachers_with_boards)
 
 
@@ -178,7 +187,7 @@ def teachers_list():
 def add_board():
     if request.method == 'POST':
         name = request.form['name']  # Имя доски
-        owner_id = request.form['owner']  # ID преподавателя, создающего доску
+        owner_id = request.form.get('owner')  # ID преподавателя, создающего доску
         selected_students = request.form.getlist('students')  # Выбранные студенты
 
         # Проверка: является ли пользователь преподавателем
@@ -203,6 +212,7 @@ def add_board():
     # Получение всех преподавателей и студентов для отображения в форме
     teachers = User.query.filter_by(role='teacher').all()
     students = User.query.filter_by(role='student').all()
+    
 
     return render_template('add_board.html', teachers=teachers, students=students)
 ###############################
@@ -303,15 +313,61 @@ def move_block(board_id):
 
 ########################################################
 
+@app.route('/save_color', methods=["POST"])
+@login_required
+def save_color():
+    data = request.get_json()
+    board_id = data.get('board_id')
+    color = data.get('color')
+
+    if not board_id or not color:
+        return jsonify({"error": "Неверные данные"}), 400
+
+    # Проверяем, есть ли связь между студентом и доской
+    association = db.session.execute(
+        db.select(student_board_association).where(
+            student_board_association.c.student_id == current_user.id,
+            student_board_association.c.board_id == board_id
+        )
+    ).fetchone()
+
+    if association:
+        # Обновляем цвет
+        db.session.execute(
+            student_board_association.update()
+            .where(student_board_association.c.student_id == current_user.id)
+            .where(student_board_association.c.board_id == board_id)
+            .values(color=color)
+        )
+        db.session.commit()
+        return jsonify({"message": "Цвет сохранен!"}), 200
+    else:
+        return jsonify({"error": "Связь не найдена"}), 404
 
 
+@app.route('/update_block_color/<int:block_id>', methods=['POST'])
+@login_required
+def update_block_color(block_id):
+    data = request.get_json()
+    new_color = data.get('color')
 
+    block = Block.query.get(block_id)
+    if not block:
+        return jsonify({"error": "Блок не найден"}), 404
+
+    # Сохраняем только цвет (привязку к пользователю не меняем)
+    block.color = new_color
+    db.session.commit()
+
+    return jsonify({"message": "Цвет успешно обновлен!"})
 
 @app.route('/change_colorset', methods = ["POST"])
 def change_colorset():
-    new_theme = request.form.get("theme")
-    if new_theme in ['light', 'dark']:
-        session['theme'] = new_theme
+    theme = session.get('theme', 'light')
+    if theme == 'light':
+        session['theme'] = 'dark'
+    else: 
+        session['theme'] = 'light'
     return redirect(url_for('index'))
 
 @app.context_processor

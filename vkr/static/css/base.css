@@ -1,40 +1,49 @@
 /* Переменные */
 
+:root {
+    --column-bg: rgba(128, 128, 128, 0.5); /* Нейтрально-серый с небольшой прозрачностью */
+    --block-bg: rgba(144, 169, 206, 0.7); /* Нейтральный голубовато-серый */
+    --border-color: rgba(150, 150, 150, 0.3); /* Мягкие границы */
+}
+
 [data-theme="light"] {
-    --background: linear-gradient(66deg, rgba(175,210,252,1) 0%, rgba(200,222,249,1) 13%, rgba(185,207,236,1) 40%, rgba(255,255,255,1) 100%);
-    --main-color: #21538d;
-    --second-color: rgb(150, 168, 204);
-    --color: #1f1f1f; /* Цвет текста */
-    --button-color: #939ab8;
-    --button-color-hover: #8db0dd;
-    --board-info: rgba(183, 194, 209, 0.733);
+    --background: linear-gradient(66deg, #97a9c4 0%, #d6e6ff 20%, #c0ccd1 80%);
+    --main-color: #1e3a8a; /* Глубокий синий */
+    --second-color: #4f7bba; /* Средне-синий */
+    --color: #212529; /* Четкий черный */
+    --button-color: #6d9ce8; /* Голубой */
+    --button-color-hover: #5186d1; /* Темно-голубой */
+    --board-info: rgba(200, 222, 249, 0.8); /* Светлый фон для блоков */
 }
 
 [data-theme="dark"] {
-    --background: linear-gradient(72deg, rgba(89, 20, 106, 1) 0%, rgba(107, 45, 161, 1) 36%, rgba(156, 60, 196, 1) 67%, rgba(170, 28, 217, 1) 78%);
-    /* --main-color: rgb(89, 20, 106); */
-    --main-color: rgb(89, 20, 106);
-    /* --second-color: #4e1d75; */
-    --second-color: #22162e;
-    --color: #ffffff; /* Цвет текста */
-    --button-color: #3a1a55;
-    --button-color-hover: #8334c4;
-    --board-info: hsla(285, 22%, 29%, 0.692);
+     --background: linear-gradient(72deg, #290d35 0%, #3f0b54 40%, #5b1d7a 80%);
+    --main-color: #a55ef7; /* Фиолетовый акцент */
+    --second-color: #3c1a49; /* Темно-фиолетовый */
+    --color: #ffffff; /* Белый текст */
+    --button-color: #5a2980; /* Темный сиреневый */
+    --button-color-hover: #9b50d7; /* Яркий фиолетовый */
+    --board-info: rgba(70, 20, 90, 0.8); /* Глубокий фиолетовый */
+    --column-bg: rgba(57, 50, 60, 0.7); /* Темно-серый с легкой синевой */
+    --column-bg: rgb(66, 62, 65);
+    --block-bg: rgba(98, 62, 112, 0.8); /* Глубокий серо-синий */
+    --border-color: rgba(100, 100, 110, 0.4); /* Нейтральный темный */
 }
 
 /* Общие стили */
 body {
-    height: 100%;
+    height: 100vh;
     width: 100%;
-    
+    max-width: 100%;
+    max-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
     background: var(--background);
     color: var(--color); 
     display: flex;
     flex-direction: column;
-    
+    overflow-y: hidden;
 }
 
 
@@ -122,7 +131,7 @@ main h1{
 }
 
 .register-div {
-    max-height: 300px;
+    max-height: 400px;
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;

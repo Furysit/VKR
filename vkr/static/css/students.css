@@ -1,43 +1,96 @@
-.students_container{
-    display: block;
-    border: solid 1px black;
-    
-    
+.students_container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    height: 1000px;
+    overflow-y: auto;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    scrollbar-width: thin;
+    scrollbar-color: #d4d4d4 transparent;
 }
 
-.students-item{
+/* Стилизация скроллбара для WebKit */
+.students_container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.students_container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.students_container::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 4px;
+}
+
+.students-item {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    gap: 30px;
     align-items: center;
+    justify-content: flex-start;
     border: 2px solid var(--color);
-    backdrop-filter: blur(500px);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
-    height: auto;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.students-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 .student-boards ul {
     list-style: none;
     padding: 0;
-}
-
-.student-boards ul :hover {
-    transition: 1ms ease-in;
-    background-color: #a8a8a856;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .student-boards li {
-    background-color: #979797;
-    padding: 5px 10px;
-    border-radius: 4px;
-    margin-top: 5px;
+    background-color: #6c757d;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin: 0;
+    transition: all 0.2s ease;
+    font-size: 0.9em;
 }
 
+.student-boards li:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
 
-.student-boards a{
+.student-boards a {
     text-decoration: none;
-    color: #ffffffc9;
+    color: #ffffff;
+    display: block;
+    transition: color 0.2s ease;
 }
 
+.student-boards a:hover {
+    color: #f8f9fa;
+}
+
+/* Дополнительные стили для адаптивности */
+@media (max-width: 768px) {
+    .students-item {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .student-boards ul {
+        flex-direction: column;
+    }
+}
